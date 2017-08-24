@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <switch>
+        <!--true代表打开Robust，请注意即使这个值为true，Robust也默认只在Release模式下开启-->
+        <!--false代表关闭Robust，无论是Debug还是Release模式都不会运行robust-->
+        <turnOnSpeed>true</turnOnSpeed>
+        <!--<turnOnRobust>false</turnOnRobust>-->
+
+        <!--是否开启手动模式，手动模式会去寻找配置项patchPackname包名下的所有类，自动的处理混淆，然后把patchPackname包名下的所有类制作成补丁-->
+        <!--这个开关只是把配置项patchPackname包名下的所有类制作成补丁，适用于特殊情况，一般不会遇到-->
+        <!--<manual>true</manual>-->
+        <manual>false</manual>
+
+        <!--项目是否支持progaurd-->
+        <proguard>true</proguard>
+        <!--<proguard>false</proguard>-->
+
+        <!--项目是否支持ASM进行插桩，默认使用ASM，推荐使用ASM，Javaassist在容易和其他字节码工具相互干扰-->
+        <useAsm>false</useAsm>
+        <!--<useAsm>false</useAsm>-->
+    </switch>
+
+    <!--需要热补的包名或者类名，这些包名下的所有类都被会插入代码-->
+    <!--这个配置项是各个APP需要自行配置，就是你们App里面你们自己代码的包名，
+    这些包名下的类会被Robust插入代码，没有被Robust插入代码的类Robust是无法修复的-->
+    <packname name="includePackage">
+        <name>com.meituan</name>
+        <name>com.sankuai</name>
+        <name>com.dianping</name>
+    </packname>
+
+    <!--不需要Robust插入代码的包名，Robust库不需要插入代码，如下的配置项请保留，还可以根据各个APP的情况执行添加-->
+    <exceptPackname name="exceptPackage">
+        <name>com.meituan.robust</name>
+        <name>com.meituan.sample.extension</name>
+    </exceptPackname>
+
+    <!-- 包括的方法名称 -->
+    <includeMethod></includeMethod>
+
+    <!-- 排除的方法名称 -->
+    <exceptMethod></exceptMethod>
+
+
+    <log>
+        <!-- log模式 枚举体 file标示写入文件, 默认路径为/sdcard/cyspeed，可以通过FileLogUtil.setFilePath设置任意路径。console标示在控制台打印，all全部  默认为console-->
+        <mode>all</mode>
+
+        <!-- log打印模式， true为只打印方法执行的时间， false会打印方法的起始调用时间与结束调用时间以及执行时间， 默认为false-->
+        <isSimple>false</isSimple>
+
+        <!-- 速度阈值，只有在log-is-simple设置为true时生效， 单位为ms， 只有超过指定时长的才会打印log-->
+        <speedThreshold>0</speedThreshold>
+
+        <!-- log打印形式 %st 代表起始时间  %et代表结束时间 %cost代表花费时间 %lname代表调用的完整方法名 %class代表类名 %method方法名
+             startExpression标示起始log表达式， endExpression标示结束log表达式， 如果isSimple为true则只用endExpression表达式
+         -->
+        <startExpression>【%class %method】 start: %st  end: %et    cost: %costms</startExpression>
+        <endExpression>【%class %method】 start: %st  end: %et    cost: %costms</endExpression>
+    </log>
+
+</resources>

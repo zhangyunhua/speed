@@ -1,0 +1,7 @@
+include ':app'
+include ':gradle-speed-api'
+include ':gradle-speed'
+include ':autopatchbase'
+include ':gradle-plugin'
+include ':patch'
+include ':auto-patch-plugin'
